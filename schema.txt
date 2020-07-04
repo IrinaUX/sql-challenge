@@ -2,7 +2,7 @@
 
 Employees
 -
-emp_no INT PK
+emp_no INT PK FK -< Dept_emp.emp_no
 emp_title_id VARCHAR(255) FK >- Titles.title_id
 birth_date DATE
 first_name VARCHAR(255)
@@ -14,7 +14,7 @@ hire_date DATE
 Dept_emp
 -
 emp_no INT PK
-depth_no VARCHAR(255) FK - Departments.dept_no 
+dept_no VARCHAR(255) FK >- Departments.dept_no
 
 
 Departments
@@ -25,13 +25,13 @@ dept_name VARCHAR(255)
 
 Dept_manager
 -
-dept_no VARCHAR(255) PK
+dept_no VARCHAR(255) PK FK >-< Dept_emp.dept_no
 emp_no INT FK - Employees.emp_no
 
 
 Salaries
 -
-emp_no INT PK 
+emp_no INT PK FK - Employees.emp_no
 salary INT 
 
 
