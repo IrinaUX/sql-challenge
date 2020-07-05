@@ -22,6 +22,14 @@ SELECT COUNT(salaries) FROM Salaries; --300024 employees,
 SELECT salary FROM Salaries --Check salary column
 --GROUP BY salary; --Groups by salary
 
+--Titles
+DROP TABLE Titles; --if needed
+CREATE TABLE Titles ( --Create Titles table
+	title_id VARCHAR(20) PRIMARY KEY,
+	title VARCHAR(255)
+);
+SELECT * FROM Titles;
+
 --Department manager
 DROP TABLE Dept_manager;
 CREATE TABLE Dept_manager (
@@ -39,3 +47,10 @@ CREATE TABLE Dept_emp (
 	dept_no VARCHAR(255),
 	PRIMARY KEY(emp_no, dept_no));
 SELECT * FROM Dept_emp;
+
+--Departments
+DROP TABLE Departments; --if needed
+CREATE TABLE Departments (
+	dept_no VARCHAR(255) PRIMARY KEY,
+	dept_name VARCHAR(255));
+

@@ -1,0 +1,42 @@
+# Physical
+
+Employees
+-
+emp_no INT PK FK - Salaries.emp_no
+emp_title_id VARCHAR(255) FK >- Titles.title_id
+birth_date DATE
+first_name VARCHAR(255)
+last_name VARCHAR(255)
+sex VARCHAR(255)
+hire_date DATE
+
+
+Dept_emp
+-
+emp_no INT FK >- Employees.emp_no
+dept_no VARCHAR(255)
+(emp_no, dept_no)
+
+
+Departments
+- 
+dept_no VARCHAR(255) PK FK -< Dept_emp.dept_no
+dept_name VARCHAR(255)
+
+
+Dept_manager
+-
+emp_no INT PK FK - Employees.emp_no
+dept_no VARCHAR(255) 
+
+
+Salaries
+-
+emp_no INT PK
+salary INT 
+
+
+Titles
+-
+title_id VARCHAR(255) PK
+title VARCHAR(255)
