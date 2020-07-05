@@ -37,11 +37,8 @@ DROP TABLE IF EXISTS Dept_manager;
 CREATE TABLE Dept_manager (
 	dept_no TEXT,
 	emp_no BIGINT NOT NULL,
-	FOREIGN KEY (emp_no) REFERENCES Employees (emp_no),
-	FOREIGN KEY (dept_no) REFERENCES Departments (dept_no),
-	FOREIGN KEY (dept_no) REFERENCES Dept_emp (dept_no)
+	FOREIGN KEY (emp_no) REFERENCES Employees(emp_no)
 );
-
 SELECT * FROM Dept_manager;
 SELECT COUNT(*) FROM Dept_manager; --24 departments
 
@@ -49,10 +46,8 @@ SELECT COUNT(*) FROM Dept_manager; --24 departments
 DROP TABLE IF EXISTS Dept_emp; -- if exists
 CREATE TABLE Dept_emp (
 	id SERIAL PRIMARY KEY NOT NULL,
-	emp_no BIGINT NOT NULL,
-	FOREIGN KEY (emp_no) REFERENCES Employees(emp_no),
-	dept_no VARCHAR(255) NOT NULL,
-	FOREIGN KEY (dept_no) REFERENCES Departments(dept_no)
+	emp_no BIGINT NOT NULL REFERENCES Employees(emp_no),
+	dept_no VARCHAR(255) NOT NULL REFERENCES Departments(dept_no)
 	--PRIMARY KEY(emp_no, dept_no)
 );
 SELECT * FROM Dept_emp;
@@ -61,7 +56,7 @@ SELECT * FROM Dept_emp;
 DROP TABLE IF EXISTS Departments; --if needed
 CREATE TABLE Departments (
 	dept_no VARCHAR(255) PRIMARY KEY NOT NULL,
-	dept_name VARCHAR(255),
+	dept_name VARCHAR(255)
 );
 SELECT * FROM Departments;
 
