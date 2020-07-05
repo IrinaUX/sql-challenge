@@ -1,7 +1,7 @@
 --Employees table
-DROP TABLE Employees IF EXISTS; --Drop the Employees table if exists
+DROP TABLE IF EXISTS Employees; --Drop the Employees table if exists
 CREATE TABLE Employees ( --Create an Employees table
-	emp_no INT PRIMARY KEY NOT NULL,
+	emp_no BIGINT PRIMARY KEY NOT NULL,
 	emp_title_id VARCHAR(10),
 	birth_date DATE,
 	first_name VARCHAR(40),
@@ -36,7 +36,7 @@ SELECT * FROM Titles;
 DROP TABLE IF EXISTS Dept_manager;
 CREATE TABLE Dept_manager (
 	dept_no TEXT,
-	emp_no BIGINT PRIMARY KEY NOT NULL, --INT is not big enough - error when import csv
+	emp_no BIGINT NOT NULL,
 	FOREIGN KEY (emp_no) REFERENCES Employees(emp_no)
 );
 SELECT * FROM Dept_manager;
@@ -45,17 +45,16 @@ SELECT COUNT(*) FROM Dept_manager; --24 departments
 --Dept_Emp
 DROP TABLE IF EXISTS Dept_emp; -- if exists
 CREATE TABLE Dept_emp (
-	emp_no INT NOT NULL,
-	dept_no VARCHAR(255) NOT NULL,
-	PRIMARY KEY(emp_no, dept_no)
+	emp_no BIGINT NOT NULL REFERENCES Employees(emp_no),
+	dept_no VARCHAR(255) NOT NULL REFERENCES Departments(dept_no)
+	--PRIMARY KEY(emp_no, dept_no)
 );
 SELECT * FROM Dept_emp;
 
 --Departments
 DROP TABLE IF EXISTS Departments; --if needed
 CREATE TABLE Departments (
-	dept_no VARCHAR(255) PRIMARY KEY,
-	dept_name VARCHAR(255),
-	FOREIGN KEY (dept_no) REFERENCES Dept_emp(emp_no, dept_no)
+	dept_no VARCHAR(255) PRIMARY KEY NOT NULL,
+	dept_name VARCHAR(255)
 );
 SELECT * FROM Departments;
