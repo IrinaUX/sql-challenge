@@ -66,3 +66,31 @@ CREATE TABLE Dept_manager (
 SELECT * FROM Dept_manager;
 SELECT COUNT(*) FROM Dept_manager; --24 departments
 
+
+--ANALYSIS START--
+--1. List the following details of each employee: employee number, last name, first name, sex, and salary:
+SELECT Employees.emp_no, Employees.last_name, Employees.first_name, Employees.sex, Salaries.salary
+FROM Employees
+LEFT JOIN Salaries 
+ON Employees.emp_no = Salaries.emp_no
+ORDER BY Employees.emp_no ASC;
+
+
+
+-- --1.a) Create new table by joining Employee and Salaries table on emp_no column:
+-- --(optional: Drop the table if needed)
+-- DROP TABLE IF EXISTS Emp_Salaries;
+-- CREATE TABLE Emp_salaries (
+-- 	emp_no BIGINT,
+-- 	FOREIGN KEY (emp_no) REFERENCES Employees (emp_no),
+-- 	first_name VARCHAR(40),
+-- 	FOREIGN KEY (first_name) REFERENCES Employees (first_name),
+-- 	last_name VARCHAR(40),
+-- 	FOREIGN KEY (last_name) REFERENCES Employees (last_name),
+-- 	sex VARCHAR(10),
+-- 	FOREIGN KEY (sex) REFERENCES Employees (sex),
+-- 	salary BIGINT,
+-- 	FOREIGN KEY (salary) REFERENCES Salaries (salary),
+-- 	PRIMARY KEY (emp_no, salary)
+-- );
+
