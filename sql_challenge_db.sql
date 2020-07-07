@@ -193,3 +193,21 @@ ON            Dept_manager.emp_no = Employees.emp_no;
 SELECT * FROM Departments_manager_info ORDER BY Departments_manager_info.dept_no ASC;
 
 -- For the rest of the tables, modified above in the queries
+
+--10. Create a table with average salaries per title
+DROP TABLE IF EXISTS employees_title;
+
+CREATE TABLE  employees_salary_title AS
+SELECT        employees.emp_no, salaries.salary, titles.title
+FROM          employees
+LEFT JOIN     salaries
+ON            employees.emp_no = salaries.emp_no
+LEFT JOIN     titles
+ON            employees.emp_title_id = titles.title_id;
+
+--SELECT * FROM employees_title;
+--SELECT title FROM employees_salary_title GROUP BY title;
+
+SELECT title, round(avg(salary), 2) as "average salary"
+from employees_salary_title
+group by title;
