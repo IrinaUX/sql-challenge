@@ -146,12 +146,16 @@ LEFT JOIN     Salaries
 ON            Employees.emp_no = Salaries.emp_no
 ORDER BY      Employees.salary ASC;
 
-SELECT * FROM Employee_salary
+SELECT * FROM Employee_salary --Check if table is created
 ORDER BY      Salary DESC;
 
+--2. Create Employees_1986 table with the first name, last name, and hire date for employees who were hired in 1986:
+CREATE TABLE  Employees_1986 AS
+SELECT        Employees.last_name, Employees.first_name, Employees.hire_date
+FROM          Employees
+WHERE         Employees.hire_date >= DATE '1986-01-01'
+AND           Employees.hire_date <= DATE '1986-12-31';
 
--- Add primary key
-ALTER TABLE firepower
-ADD COLUMN id SERIAL PRIMARY KEY;
-
+SELECT * FROM Employees_1986
+ORDER BY      hire_date DESC; -- Query and order by hire_date in descending order
 
