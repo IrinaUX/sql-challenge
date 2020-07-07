@@ -66,7 +66,7 @@ CREATE TABLE Dept_manager (
 SELECT * FROM Dept_manager;
 SELECT COUNT(*) FROM Dept_manager; --24 departments
 
-
+--======================================
 --=========== ANALYSIS START ===========
 
 --1. List the following details of each employee: employee number, last name, first name, sex, and salary:
@@ -132,5 +132,26 @@ FROM       Employees
 GROUP BY   Employees.last_name --as grouped_last_names
 ORDER BY   COUNT (Employees.last_name) ASC
 
+--================= ANALYSIS END ==================--
+--===================================================
+
+--===================================================
+--======== FOR IMPORT TO JUPYTER NOTEBOOK =========--
+
+--1. Create Employee_salary table that consists of employee number, last name, first name, sex, and salary:
+CREATE TABLE  Employee_salary AS
+SELECT        Employees.emp_no, Employees.last_name, Employees.first_name, Employees.sex, Salaries.salary
+FROM          Employees
+LEFT JOIN     Salaries 
+ON            Employees.emp_no = Salaries.emp_no
+ORDER BY      Employees.salary ASC;
+
+SELECT * FROM Employee_salary
+ORDER BY      Salary DESC;
+
+
+-- Add primary key
+ALTER TABLE firepower
+ADD COLUMN id SERIAL PRIMARY KEY;
 
 
