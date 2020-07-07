@@ -93,30 +93,46 @@ ON         Dept_manager.emp_no = Employees.emp_no;
 
 --4. List the department of each employee with the following information: 
 	--a) employee number, last name, first name, and department name
-SELECT     Employees.emp_no, Employees.last_name, Employees.first_name, Dept_emp.dept_no, Departments.dept_name
-FROM       Employees
-JOIN       Dept_emp
-ON         Employees.emp_no = Dept_emp.emp_no
-JOIN       Departments
-ON         Dept_emp.dept_no = Departments.dept_no;
+	--b) create table as per the query
+CREATE TABLE employee_department_info AS
+SELECT       Employees.emp_no, Employees.last_name, Employees.first_name, Dept_emp.dept_no, Departments.dept_name
+FROM         Employees
+JOIN         Dept_emp
+ON           Employees.emp_no = Dept_emp.emp_no
+JOIN         Departments
+ON           Dept_emp.dept_no = Departments.dept_no;
 
---5. List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B":
-SELECT     Employees.first_name, Employees.last_name, Employees.sex
-FROM 	   Employees
-WHERE      Employees.first_name = 'Hercules'
-AND        last_name LIKE 'B%';
-	
+SELECT * FROM employee_department_info;
+
+--5. List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B".
+   -- a) Create employees_hercules_b table based on the query: 
+DROP TABLE IF EXISTS employees_Hercules_B;
+CREATE TABLE  employees_Hercules_B AS
+SELECT        Employees.first_name, Employees.last_name, Employees.sex
+FROM 	      Employees
+WHERE         Employees.first_name = 'Hercules'
+AND           last_name LIKE 'B%';
+SELECT * FROM employees_Hercules_B 
+ORDER BY      last_name ASC;
+
 --6. List all employees in the Sales department, including their employee number, last name, first name, and department name:
+	--a) Create employee_dept_sales table
+CREATE TABLE employee_dept_sales AS
 SELECT     Employees.emp_no, Employees.last_name, Employees.first_name, Departments.dept_name --Dept_emp.dept_no 
 FROM       Employees
 LEFT JOIN  Dept_emp
 ON         Employees.emp_no = Dept_emp.emp_no
 LEFT JOIN  Departments
 ON         Dept_emp.dept_no = Departments.dept_no
-WHERE      Departments.dept_name = 'Sales';
+WHERE      Departments.dept_name = 'Sales'
+ORDER BY   Employees.emp_no;
+SELECT * FROM employee_dept_sales;
 
 --7. List all employees in the Sales and Development departments, 
-	--a) including their employee number, last name, first name, and department name:
+	--a) including their employee number, last name, first name, and department name
+	--b) create employees_dept_sales_and_dev table
+DROP TABLE IF EXISTS employees_dept_sales_and_dev;
+CREATE TABLE employees_dept_sales_and_dev AS
 SELECT     Employees.emp_no, Employees.last_name, Employees.first_name, Departments.dept_name --Dept_emp.dept_no 
 FROM       Employees
 LEFT JOIN  Dept_emp
@@ -125,12 +141,18 @@ LEFT JOIN  Departments
 ON         Dept_emp.dept_no = Departments.dept_no
 WHERE      Departments.dept_name = 'Sales' 
 OR         Departments.dept_name = 'Development';
+SELECT * FROM employees_dept_sales_and_dev --Query the table with dept_name sorted in ascending (default) option
+ORDER BY   dept_name;
+SELECT COUNT(*) FROM employees_dept_sales_and_dev; -- Check the row count in the new table, as onlyu 1000 listed
+
 
 --8. In descending order, list the frequency count of employee last names, i.e., how many employees share each last name:
-SELECT     COUNT (Employees.last_name), Employees.last_name --Employees.last_name
-FROM       Employees
-GROUP BY   Employees.last_name --as grouped_last_names
-ORDER BY   COUNT (Employees.last_name) ASC
+CREATE TABLE     employee_last_name_freq_count AS
+SELECT COUNT    (Employees.last_name), Employees.last_name --Employees.last_name
+FROM             Employees
+GROUP BY         Employees.last_name --as grouped_last_names
+ORDER BY COUNT  (Employees.last_name) ASC
+SELECT * FROM    employee_last_name_freq_count;
 
 --================= ANALYSIS END ==================--
 --===================================================
@@ -169,3 +191,5 @@ ON            Dept_manager.dept_no = Departments.dept_no
 LEFT JOIN     Employees
 ON            Dept_manager.emp_no = Employees.emp_no;
 SELECT * FROM Departments_manager_info ORDER BY Departments_manager_info.dept_no ASC;
+
+-- For the rest of the tables, modified above in the queries
