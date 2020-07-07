@@ -159,3 +159,13 @@ AND           Employees.hire_date <= DATE '1986-12-31';
 SELECT * FROM Employees_1986
 ORDER BY      hire_date DESC; -- Query and order by hire_date in descending order
 
+--3. Create a table that lists the manager of each department with the following information: 
+	--a) department number, department name, the manager's employee number, last name, first name.
+CREATE TABLE  Departments_manager_info AS
+SELECT        Dept_manager.dept_no, Departments.dept_name, Dept_manager.emp_no, Employees.last_name, Employees.first_name
+FROM          Dept_manager
+LEFT JOIN     Departments
+ON            Dept_manager.dept_no = Departments.dept_no
+LEFT JOIN     Employees
+ON            Dept_manager.emp_no = Employees.emp_no;
+SELECT * FROM Departments_manager_info ORDER BY Departments_manager_info.dept_no ASC;
