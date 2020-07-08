@@ -9,7 +9,7 @@ SELECT * FROM Titles;
 --Employees table
 DROP TABLE IF EXISTS Employees CASCADE; --Drop the Employees table if exists
 CREATE TABLE Employees ( --Create an Employees table
-	emp_no BIGINT PRIMARY KEY NOT NULL,
+	emp_no BIGINT PRIMARY KEY,
 	emp_title_id VARCHAR(10),
 	FOREIGN KEY (emp_title_id) REFERENCES Titles(title_id),
 	birth_date DATE,
@@ -18,6 +18,7 @@ CREATE TABLE Employees ( --Create an Employees table
 	sex VARCHAR(10),
 	hire_date DATE
 );
+
 SELECT * FROM Employees; --Check all columns and rows in Employees table
 SELECT COUNT(*) FROM Employees; --Count all rows in Employees table
 --Note: 300024 employees
@@ -36,23 +37,25 @@ SELECT salary FROM Salaries --Check salary column
 --GROUP BY salary; --Groups by salary
 
 --Departments
-DROP TABLE IF EXISTS Departments; --if needed
+DROP TABLE IF EXISTS Departments CASCADE; --if needed
 CREATE TABLE Departments (
-	dept_no VARCHAR(255) PRIMARY KEY NOT NULL,
-	dept_name VARCHAR(255),
+	dept_no VARCHAR(255) PRIMARY KEY,
+	dept_name VARCHAR(255)
 );
 SELECT * FROM Departments;
 
 --Dept_Emp
 DROP TABLE IF EXISTS Dept_emp; -- if exists
 CREATE TABLE Dept_emp (
-	id SERIAL PRIMARY KEY,
+	--id SERIAL PRIMARY KEY,
 	emp_no BIGINT NOT NULL,
 	FOREIGN KEY (emp_no) REFERENCES Employees(emp_no),
 	dept_no VARCHAR(255) NOT NULL,
-	FOREIGN KEY (dept_no) REFERENCES Departments(dept_no)
+	FOREIGN KEY (dept_no) REFERENCES Departments(dept_no),
+	PRIMARY KEY (dept_no, emp_no)
 );
 SELECT * FROM Dept_emp;
+SELECT COUNT (*) FROM Dept_emp;
 
 --Department manager
 DROP TABLE IF EXISTS Dept_manager;
