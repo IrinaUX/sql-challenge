@@ -1,1 +1,1 @@
-stillahiddenpasswordsorry = 'stillahiddenpasswordsorry'
+password = 'kk'
